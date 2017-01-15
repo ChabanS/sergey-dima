@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Currency.findByR030", query = "SELECT c FROM Currency c WHERE c.r030 = :r030")
     , @NamedQuery(name = "Currency.findByName", query = "SELECT c FROM Currency c WHERE c.name = :name")
     , @NamedQuery(name = "Currency.findByRate", query = "SELECT c FROM Currency c WHERE c.rate = :rate")
-    , @NamedQuery(name = "Currency.findByCc", query = "SELECT c FROM Currency c WHERE c.cc = :cc")
+    , @NamedQuery(name = "Currency.findByCc", query = "SELECT c FROM Currency c WHERE c.cc = :cc AND c.exchangeDate BETWEEN :startDate AND :endDate")
     , @NamedQuery(name = "Currency.findByExchangeDate", query = "SELECT c FROM Currency c WHERE c.exchangeDate = :exchangeDate")
     , @NamedQuery(name = "Currency.findByCreateDate", query = "SELECT c FROM Currency c WHERE c.createDate = :createDate")})
 public class Currency implements Serializable {

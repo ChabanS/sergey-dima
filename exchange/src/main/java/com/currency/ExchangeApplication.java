@@ -19,29 +19,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 public class ExchangeApplication {
-    
+
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.currency_exchange_jar_0.0.1-SNAPSHOTPU");
 
     private EntityManager getEntityManger() {
         return emf.createEntityManager();
     }
-    
+
     @GetMapping("/v1/value")
-    public String index(@RequestParam("date") String dateString) {
+    public String index(
+            @RequestParam("cc") String cc,
+            @RequestParam("from") String fromDate,
+            @RequestParam("to") String toDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.applyPattern("dd.MM.yyyy");
-        Date date = null;
+        Date startDate = null;
+        Date endDate = null;
         try {
-            date = (Date) dateFormat.parse(dateString);
+            startDate = (Date) dateFormat.parse(fromDate);
+            endDate = (Date) dateFormat.parse(toDate);
+            
         } catch (ParseException ex) {
             Logger.getLogger(ExchangeApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
         EntityManager em = getEntityManger();
-        List<Currency> result = em.createNamedQuery("Currency.findByExchangeDate", Currency.class).setParameter("exchangeDate", date).getResultList();
+        List<Currency> result = em.createNamedQuery("Currency.findByCc", Currency.class).
+                setParameter("cc", cc).
+                setParameter("startDate", startDate).
+                setParameter("endDate", endDate).getResultList();
         return result.toString();
     }
 
-	public static void main(String[] args) {
-		SpringApplication.run(ExchangeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ExchangeApplication.class, args);
+    }
 }
