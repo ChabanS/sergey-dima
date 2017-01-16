@@ -29,25 +29,40 @@ public class ExchangeApplication {
     @GetMapping("/v1/value")
     public String index(
             @RequestParam("cc") String cc,
-            @RequestParam("from") String fromDate,
-            @RequestParam("to") String toDate) {
+            @RequestParam(value = "from", required = false) String fromDate,
+            @RequestParam(value = "to", required = false) String toDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.applyPattern("dd.MM.yyyy");
-        Date startDate = null;
-        Date endDate = null;
-        try {
-            startDate = (Date) dateFormat.parse(fromDate);
-            endDate = (Date) dateFormat.parse(toDate);
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(ExchangeApplication.class.getName()).log(Level.SEVERE, null, ex);
+        if (fromDate == null || toDate == null) {
+            EntityManager em = getEntityManger();
+            List<Currency> result = null;
+            try {
+                result = em.createNamedQuery("Currency.findByCc", Currency.class).
+                        setParameter("cc", cc).
+                        setParameter("startDate", dateFormat.parse("01.01.1996")).
+                        setParameter("endDate", new Date()).getResultList();
+            } catch (ParseException ex) {
+                Logger.getLogger(ExchangeApplication.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result.toString();
+        } else {
+
+            Date startDate = null;
+            Date endDate = null;
+            try {
+                startDate = (Date) dateFormat.parse(fromDate);
+                endDate = (Date) dateFormat.parse(toDate);
+
+            } catch (ParseException ex) {
+                Logger.getLogger(ExchangeApplication.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EntityManager em = getEntityManger();
+            List<Currency> result = em.createNamedQuery("Currency.findByCc", Currency.class).
+                    setParameter("cc", cc).
+                    setParameter("startDate", startDate).
+                    setParameter("endDate", endDate).getResultList();
+            return result.toString();
         }
-        EntityManager em = getEntityManger();
-        List<Currency> result = em.createNamedQuery("Currency.findByCc", Currency.class).
-                setParameter("cc", cc).
-                setParameter("startDate", startDate).
-                setParameter("endDate", endDate).getResultList();
-        return result.toString();
     }
 
     public static void main(String[] args) {
