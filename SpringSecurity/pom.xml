@@ -66,6 +66,14 @@
             <artifactId>spring-security-core</artifactId>
             <version>${springframework.version}</version>
         </dependency>
+
+        <!-- Spring Security JSP Taglib -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        
         <!--Spring database support-->
         <dependency>
             <groupId>org.springframework</groupId>
