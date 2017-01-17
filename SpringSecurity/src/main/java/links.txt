@@ -1,0 +1,7 @@
+Spring security
+http://docs.spring.io/spring-security/site/docs/3.0.x/reference/security-filter-chain.html#d0e2952
+http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
+Registration, validation, auto-login
+http://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
+
+
