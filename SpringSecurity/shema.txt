@@ -1,0 +1,19 @@
+web.xml
+	|
+	|------/WEB-INF/spring/root-context.xml
+	|			|
+	|			|
+	|			|------data.xml
+	|			|			|
+	|			|			|
+	|			|			|------/WEB-INF/jdbc.properties
+	|			|
+	|			|
+	|			|------security_db.xml
+	|
+	|
+	|------/WEB-INF/spring/appServlet/servlet-context.xml
+				|
+				|
+				|------controllers.xml
+	
