@@ -4,9 +4,9 @@ web.xml
 	|			|
 	|			|
 	|			|------data.xml
-	|			|			|
-	|			|			|
-	|			|			|------/WEB-INF/jdbc.properties
+	|			|	|
+	|			|	|
+	|			|	|------/WEB-INF/jdbc.properties
 	|			|
 	|			|
 	|			|------security_db.xml
