@@ -66,4 +66,9 @@ public class ContactController {
         contactService.removeContact(contactId);
         return "redirect:/index";
     }
+    
+    @RequestMapping("/menu")
+    public String menu() {
+        return "menu";
+    }
 }

@@ -1,0 +1,15 @@
+ua\com\codefire\crypt\CryptRunner.class
+ua\com\codefire\dao\UserDaoImpl.class
+ua\com\codefire\dao\UserRolesDao.class
+ua\com\codefire\dao\UserRolesDaoImpl.class
+ua\com\codefire\entity\UserRoles.class
+ua\com\codefire\dao\ContactDAO.class
+ua\com\codefire\service\UserService.class
+ua\com\codefire\service\ContactService.class
+ua\com\codefire\dao\UserDao.class
+ua\com\codefire\dao\ContactDAOImpl.class
+ua\com\codefire\entity\Contact.class
+ua\com\codefire\service\ContactServiceImpl.class
+ua\com\codefire\entity\User.class
+ua\com\codefire\web\ContactController.class
+ua\com\codefire\service\UserServiceImpl.class

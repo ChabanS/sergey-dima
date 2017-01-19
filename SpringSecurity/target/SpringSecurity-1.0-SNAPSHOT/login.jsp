@@ -14,7 +14,12 @@
         </a> | 
         <a href="<c:url value="/register" />">
             <spring:message code="label.register" />
-        </a><br/>
+        </a> |
+        <a href="<c:url value="/menu" />">
+            <spring:message code="label.menu" />
+        </a>
+        
+        <br/>
         <c:if test="${not empty param.error}">
             <font color="red"> <spring:message code="label.loginerror" />
                 : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message} </font>
