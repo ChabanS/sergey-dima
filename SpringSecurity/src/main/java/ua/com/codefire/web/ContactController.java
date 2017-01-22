@@ -30,13 +30,24 @@ public class ContactController {
     
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/index")
-    public String listContacts(Map<String, Object> map) {
-        map.put("contact", new Contact());
-        map.put("contactList", contactService.listContact());
-        return "contact";
+    
+    
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "redirect:/login.jsp";
     }
+    
+    @RequestMapping("/index")
+    public String checkSignIn(){
+        return "menu";
+    }
+
+//    @RequestMapping("/index")
+//    public String listContacts(Map<String, Object> map) {
+//        map.put("contact", new Contact());
+//        map.put("contactList", contactService.listContact());
+//        return "contact";
+//    }
     
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerUser(Map<String, Object> map) {
@@ -50,11 +61,6 @@ public class ContactController {
         return "redirect:/login.jsp";
     }
 
-    @RequestMapping("/")
-    public String home() {
-        return "redirect:/index";
-    }
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addContact(@ModelAttribute("contact") Contact contact, BindingResult result) {
         contactService.addContact(contact);
@@ -65,10 +71,5 @@ public class ContactController {
     public String deleteContact(@PathVariable("contactId") Integer contactId) {
         contactService.removeContact(contactId);
         return "redirect:/index";
-    }
-    
-    @RequestMapping("/menu")
-    public String menu() {
-        return "menu";
     }
 }

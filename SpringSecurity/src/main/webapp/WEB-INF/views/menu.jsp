@@ -36,6 +36,9 @@
 
     </head>
     <body>
+        <a href="<c:url value="/logout" />">
+            <spring:message code="label.logout" />
+        </a>
         <div align="center" class="container">
             </br>
             <div class="row">
