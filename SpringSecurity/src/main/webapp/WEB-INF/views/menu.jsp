@@ -36,11 +36,25 @@
 
     </head>
     <body>
-        <a href="<c:url value="/logout" />">
-            <spring:message code="label.logout" />
-        </a>
+        <!--Block out-->
+        <div class="container">
+            <table width="100%">
+                <tr>
+                    <td>
+                        </br>
+                        <a href="<c:url value="/logout" />">
+                            <span style="vertical-align: 9px; font-size: 1.5em ">
+                                <spring:message code="label.logout" /> 
+                            </span>
+                            <i class="fa fa-sign-out fa-3x" aria-hidden="true"></i> 
+                        </a>
+                    </td>    
+                </tr>
+            </table>  
+        </div>
+                            
+        <!--Blocks menu-->
         <div align="center" class="container">
-            </br>
             <div class="row">
                 </br>
                 <div class="col-lg-2 col-lg-offset-2" >
@@ -100,10 +114,12 @@
                 </br>
                 </br>
                 <div class="col-lg-2 col-lg-offset-2">
-                    <!--                    <a href="#" class="btn btn-sq-lg btn-primary btn-block">
-                                            <i class="fa fa-user fa-5x"></i><br/>
-                                            Demo Primary <br>Button
-                                        </a>-->
+                    <a href="#" class="btn btn-sq-lg btn-primary btn-block">
+                        </br>
+                        <i class="fa fa-user fa-5x"></i><br/>
+                        </br>
+                        <spring:message code="label.user"/>
+                    </a>
                 </div>
                 <div class="col-lg-2 col-lg-offset-1">
                     <a href="#" class="btn btn-sq-lg btn-primary btn-block">
