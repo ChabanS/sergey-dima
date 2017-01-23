@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,10 +19,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users", catalog = "food_service")
 public class User implements java.io.Serializable {
-
+    
+    
+    private Integer id_users;
     private String username;
     private String password;
     private byte enabled;
+    private String name;
+    private String position;
     private Set<UserRoles> userRoles = new HashSet<>(0);
 
     public User() {
@@ -39,7 +45,25 @@ public class User implements java.io.Serializable {
         this.userRoles = userRoles;
     }
 
+    public User(String username, String password, byte enabled, String name, String position) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.position = position;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_users", nullable = false)
+    public Integer getId_users() {
+        return id_users;
+    }
+
+    public void setId_users(Integer id_users) {
+        this.id_users = id_users;
+    }
+
+    
     @Column(name = "username", unique = true, nullable = false, length = 45)
     public String getUsername() {
         return this.username;
@@ -76,12 +100,34 @@ public class User implements java.io.Serializable {
         this.userRoles = userRoles;
     }
 
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "position")
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.username);
-        hash = 97 * hash + Objects.hashCode(this.password);
-        hash = 97 * hash + this.enabled;
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id_users);
+        hash = 29 * hash + Objects.hashCode(this.username);
+        hash = 29 * hash + Objects.hashCode(this.password);
+        hash = 29 * hash + this.enabled;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.position);
+        hash = 29 * hash + Objects.hashCode(this.userRoles);
         return hash;
     }
 
@@ -103,12 +149,24 @@ public class User implements java.io.Serializable {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
-        return Objects.equals(this.password, other.password);
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.position, other.position)) {
+            return false;
+        }
+        if (!Objects.equals(this.id_users, other.id_users)) {
+            return false;
+        }
+        return Objects.equals(this.userRoles, other.userRoles);
     }
 
     @Override
     public String toString() {
-        return "Users{" + "username=" + username + ", password=" + password + ", enabled=" + enabled + '}';
+        return "User{" + "id_users=" + id_users + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + ", userRoles=" + userRoles + '}';
     }
-
+    
 }
