@@ -2,8 +2,14 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <mapping class="ua.com.codefire.entity.Contact" />
-        <mapping class="ua.com.codefire.entity.User" />
-        <mapping class="ua.com.codefire.entity.UserRoles" />
+        <mapping class="ua.com.codefire.entity.Contact"/>
+        <mapping class="ua.com.codefire.entity.User"/>
+        <mapping class="ua.com.codefire.entity.UserRoles"/>
+        <mapping class="ua.com.codefire.entity.Clients" />
+        <mapping class="ua.com.codefire.entity.ClientAdr" />
+        <mapping class="ua.com.codefire.entity.Orders" />
+        <mapping class="ua.com.codefire.entity.Goods" />
+        <mapping class="ua.com.codefire.entity.Flags" />
+        <mapping class="ua.com.codefire.entity.GoodCategory" />
     </session-factory>
 </hibernate-configuration>
