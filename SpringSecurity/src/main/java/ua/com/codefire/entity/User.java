@@ -19,9 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users", catalog = "food_service")
 public class User implements java.io.Serializable {
-    
-    
-    private Integer id_users;
+
     private String username;
     private String password;
     private byte enabled;
@@ -45,25 +43,7 @@ public class User implements java.io.Serializable {
         this.userRoles = userRoles;
     }
 
-    public User(String username, String password, byte enabled, String name, String position) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.position = position;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_users", nullable = false)
-    public Integer getId_users() {
-        return id_users;
-    }
-
-    public void setId_users(Integer id_users) {
-        this.id_users = id_users;
-    }
-
-    
     @Column(name = "username", unique = true, nullable = false, length = 45)
     public String getUsername() {
         return this.username;
@@ -121,7 +101,6 @@ public class User implements java.io.Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id_users);
         hash = 29 * hash + Objects.hashCode(this.username);
         hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + this.enabled;
@@ -158,15 +137,13 @@ public class User implements java.io.Serializable {
         if (!Objects.equals(this.position, other.position)) {
             return false;
         }
-        if (!Objects.equals(this.id_users, other.id_users)) {
-            return false;
-        }
+        
         return Objects.equals(this.userRoles, other.userRoles);
     }
 
     @Override
     public String toString() {
-        return "User{" + "id_users=" + id_users + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + ", userRoles=" + userRoles + '}';
+        return "User{"  + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + ", userRoles=" + userRoles + '}';
     }
     
 }

@@ -114,7 +114,7 @@
                 </br>
                 </br>
                 <div class="col-lg-2 col-lg-offset-2">
-                    <a href="#" class="btn btn-sq-lg btn-primary btn-block">
+                    <a href="<c:url value="/register"/>" class="btn btn-sq-lg btn-primary btn-block">
                         </br>
                         <i class="fa fa-user fa-5x"></i><br/>
                         </br>

@@ -17,6 +17,7 @@ import ua.com.codefire.entity.Contact;
 import ua.com.codefire.entity.User;
 import ua.com.codefire.service.ContactService;
 import ua.com.codefire.service.UserService;
+import ua.com.codefire.util.Validator;
 
 /**
  *
@@ -27,18 +28,20 @@ public class ContactController {
 
     @Autowired
     private ContactService contactService;
-    
+
     @Autowired
     private UserService userService;
-    
-    
+
+    @Autowired
+    private Validator validator;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "redirect:/login.jsp";
     }
-    
+
     @RequestMapping("/index")
-    public String checkSignIn(){
+    public String checkSignIn() {
         return "menu";
     }
 
@@ -48,17 +51,20 @@ public class ContactController {
 //        map.put("contactList", contactService.listContact());
 //        return "contact";
 //    }
-    
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerUser(Map<String, Object> map) {
         map.put("user", new User());
         return "register";
     }
-    
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") User user){
-        userService.register(user);
-        return "redirect:/login.jsp";
+    public String registerUser(@ModelAttribute("user") User user) {
+        //if (validator.emailValidator(user.getUsername()) && validator.passValidator(user.getPassword())) {
+            //if()
+            userService.register(user);
+            return "menu";
+//        }
+//        return "register";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
