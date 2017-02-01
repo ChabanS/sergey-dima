@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.com.codefire.entity.Contact;
+import ua.com.codefire.entity.GoodCategory;
+import ua.com.codefire.entity.Goods;
 import ua.com.codefire.entity.User;
 import ua.com.codefire.service.ContactService;
+import ua.com.codefire.service.GoodCategoryService;
+import ua.com.codefire.service.GoodsService;
 import ua.com.codefire.service.UserService;
 import ua.com.codefire.util.Validator;
 
@@ -34,6 +38,12 @@ public class ContactController {
 
     @Autowired
     private Validator validator;
+
+    @Autowired
+    private GoodsService goodsService;
+
+    @Autowired
+    private GoodCategoryService goodCategoryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
@@ -60,9 +70,9 @@ public class ContactController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user) {
         //if (validator.emailValidator(user.getUsername()) && validator.passValidator(user.getPassword())) {
-            //if()
-            userService.register(user);
-            return "menu";
+        //if()
+        userService.register(user);
+        return "menu";
 //        }
 //        return "register";
     }
@@ -77,5 +87,13 @@ public class ContactController {
     public String deleteContact(@PathVariable("contactId") Integer contactId) {
         contactService.removeContact(contactId);
         return "redirect:/index";
+    }
+
+    @RequestMapping("/test")
+    public String test() {
+        GoodCategory goodCategory = new GoodCategory("TestDrink");
+        goodCategoryService.addGoodCategory(goodCategory);
+        goodsService.addGood(new Goods("Beer", 4.9, goodCategory));
+        return "menu";
     }
 }

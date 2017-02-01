@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     @Autowired(required = false)
     private BCryptPasswordEncoder passwordEncoder;
 
-
     @Override
     public void register(User user) {
         user.setEnabled((byte)1);
@@ -39,6 +38,8 @@ public class UserServiceImpl implements UserService {
         //user.setUserRoles(rolesDao.getAll());
         userDao.add(user);
         rolesDao.save(new UserRoles(user, "ROLE_USER"));
+
+        
     }
 
 }
