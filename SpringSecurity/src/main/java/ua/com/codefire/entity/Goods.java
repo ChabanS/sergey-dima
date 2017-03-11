@@ -112,10 +112,7 @@ public class Goods implements Serializable {
         if (!Objects.equals(this.good_price, other.good_price)) {
             return false;
         }
-        if (!Objects.equals(this.goodCategory, other.goodCategory)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.goodCategory, other.goodCategory);
     }
 
     @Override

@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -47,11 +50,16 @@ public class ClientAdr implements Serializable {
     
     @Column(name = "porch", nullable = true)
     private Integer porch;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_clients", nullable = false)
+    private Clients clients;
+
 
     public ClientAdr() {
     }
 
-    public ClientAdr(Integer id_client, String city, String street, String house, String apartment, Integer floor, Integer porch) {
+    public ClientAdr(Integer id_client, String city, String street, String house, String apartment, Integer floor, Integer porch, Clients clients) {
         this.id_client = id_client;
         this.city = city;
         this.street = street;
@@ -59,6 +67,7 @@ public class ClientAdr implements Serializable {
         this.apartment = apartment;
         this.floor = floor;
         this.porch = porch;
+        this.clients = clients;
     }
 
     public Integer getId_adr() {
@@ -123,6 +132,14 @@ public class ClientAdr implements Serializable {
 
     public void setPorch(Integer porch) {
         this.porch = porch;
+    }
+    
+    public Clients getClients() {
+        return clients;
+    }
+
+    public void setClients(Clients clients) {
+        this.clients = clients;
     }
 
     @Override

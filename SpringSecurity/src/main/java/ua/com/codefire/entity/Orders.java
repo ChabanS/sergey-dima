@@ -173,10 +173,7 @@ public class Orders implements Serializable{
         if (!Objects.equals(this.order_time_complit, other.order_time_complit)) {
             return false;
         }
-        if (!Objects.equals(this.order_time_change, other.order_time_change)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.order_time_change, other.order_time_change);
     }
 
     @Override

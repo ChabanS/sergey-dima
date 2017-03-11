@@ -1,16 +1,10 @@
 package ua.com.codefire.entity;
 // Generated May 22, 2016 10:29:59 AM by Hibernate Tools 4.3.1
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,7 +19,6 @@ public class User implements java.io.Serializable {
     private byte enabled;
     private String name;
     private String position;
-    private Set<UserRoles> userRoles = new HashSet<>(0);
 
     public User() {
     }
@@ -34,13 +27,6 @@ public class User implements java.io.Serializable {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-    }
-
-    public User(String username, String password, byte enabled, Set userRoles) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.userRoles = userRoles;
     }
 
     @Id
@@ -71,15 +57,6 @@ public class User implements java.io.Serializable {
         this.enabled = enabled;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
-    public Set<UserRoles> getUserRoles() {
-        return this.userRoles;
-    }
-
-    public void setUserRoles(Set<UserRoles> userRoles) {
-        this.userRoles = userRoles;
-    }
-
     @Column(name = "name")
     public String getName() {
         return name;
@@ -96,17 +73,16 @@ public class User implements java.io.Serializable {
 
     public void setPosition(String position) {
         this.position = position;
-    }    
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.username);
-        hash = 29 * hash + Objects.hashCode(this.password);
-        hash = 29 * hash + this.enabled;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.position);
-        hash = 29 * hash + Objects.hashCode(this.userRoles);
+        hash = 53 * hash + Objects.hashCode(this.username);
+        hash = 53 * hash + Objects.hashCode(this.password);
+        hash = 53 * hash + this.enabled;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.position);
         return hash;
     }
 
@@ -134,16 +110,12 @@ public class User implements java.io.Serializable {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.position, other.position)) {
-            return false;
-        }
-        
-        return Objects.equals(this.userRoles, other.userRoles);
+        return Objects.equals(this.position, other.position);
     }
 
     @Override
     public String toString() {
-        return "User{"  + ", username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + ", userRoles=" + userRoles + '}';
+        return "User{" + "username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + '}';
     }
     
 }

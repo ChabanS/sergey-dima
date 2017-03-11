@@ -1,16 +1,12 @@
 package ua.com.codefire.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +19,6 @@ public class GoodCategory implements Serializable {
 
     private Integer id_good_category;
     private String good_category_name;
-    private Set<Goods> goods = new HashSet<>(0);
 
     public GoodCategory() {
     }
@@ -52,21 +47,11 @@ public class GoodCategory implements Serializable {
         this.good_category_name = good_category_name;
     }
 
-    //question why use mappedBy----------------------------------------------
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodCategory")
-    public Set<Goods> getGoods() {
-        return goods;
-    }
-
-    public void setGoods(Set<Goods> goods) {
-        this.goods = goods;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.id_good_category);
-        hash = 83 * hash + Objects.hashCode(this.good_category_name);
+        hash = 29 * hash + Objects.hashCode(this.id_good_category);
+        hash = 29 * hash + Objects.hashCode(this.good_category_name);
         return hash;
     }
 
@@ -92,5 +77,6 @@ public class GoodCategory implements Serializable {
     public String toString() {
         return "GoodCategory{" + "id_good_category=" + id_good_category + ", good_category_name=" + good_category_name + '}';
     }
-
+    
+    
 }
