@@ -33,8 +33,7 @@ public class Flags implements Serializable {
     public Flags() {
     }
 
-    public Flags(Integer id_flags, String flag_name) {
-        this.id_flags = id_flags;
+    public Flags(String flag_name) {
         this.flag_name = flag_name;
     }
 

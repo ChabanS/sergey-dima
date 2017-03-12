@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,26 +23,39 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "contact")
-public class Contact implements Serializable{
+public class Contact implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "firstname")
     private String firstname;
+
+    @Column(name = "lastname")
     private String lastname;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "telephone")
     private String telephone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_clients", nullable = false)
+    private Clients client;
 
     public Contact() {
     }
 
-    public Contact(String firstname, String lastname, String email, String telephone) {
+    public Contact(String firstname, String lastname, String email, String telephone, Clients client) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.telephone = telephone;
+        this.client = client;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -48,7 +64,6 @@ public class Contact implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "firstname")
     public String getFirstname() {
         return firstname;
     }
@@ -57,7 +72,6 @@ public class Contact implements Serializable{
         this.firstname = firstname;
     }
 
-    @Column(name = "lastname")
     public String getLastname() {
         return lastname;
     }
@@ -66,7 +80,6 @@ public class Contact implements Serializable{
         this.lastname = lastname;
     }
 
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -75,7 +88,6 @@ public class Contact implements Serializable{
         this.email = email;
     }
 
-    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
@@ -84,14 +96,23 @@ public class Contact implements Serializable{
         this.telephone = telephone;
     }
 
+    public Clients getClient() {
+        return client;
+    }
+
+    public void setClient(Clients client) {
+        this.client = client;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.firstname);
-        hash = 79 * hash + Objects.hashCode(this.lastname);
-        hash = 79 * hash + Objects.hashCode(this.email);
-        hash = 79 * hash + Objects.hashCode(this.telephone);
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.firstname);
+        hash = 23 * hash + Objects.hashCode(this.lastname);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.telephone);
+        hash = 23 * hash + Objects.hashCode(this.client);
         return hash;
     }
 
@@ -119,12 +140,14 @@ public class Contact implements Serializable{
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        return Objects.equals(this.telephone, other.telephone);
+        if (!Objects.equals(this.telephone, other.telephone)) {
+            return false;
+        }
+        return Objects.equals(this.client, other.client);
     }
 
     @Override
     public String toString() {
-        return "Contact{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", telephone=" + telephone + '}';
+        return "Contact{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", telephone=" + telephone + ", client=" + client + '}';
     }
-
 }

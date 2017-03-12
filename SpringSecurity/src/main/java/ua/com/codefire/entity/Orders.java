@@ -10,9 +10,12 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,42 +24,46 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "orders", catalog = "food_service")
-public class Orders implements Serializable{
-    
+public class Orders implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_orders", nullable = false)
     private Integer id_orders;
-    
-    @Column(name = "id_goods", nullable = false)
-    private Integer id_goods;
-    
-    @Column(name = "id_client", nullable = false)
-    private Integer id_client;
-    
-    @Column(name = "id_user", nullable = false)
-    private Integer id_user;
-    
-    @Column(name = "order_flag", nullable = false)
-    private Integer order_flag;
-    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Goods good;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Clients client;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Flags flag;
+
     @Column(name = "order_time")
     private Date order_time;
-    
+
     @Column(name = "order_time_complit")
     private Date order_time_complit;
-    
+
     @Column(name = "order_time_change")
     private Date order_time_change;
-    
-     public Orders() {
+
+    public Orders() {
     }
 
-    public Orders(Integer id_goods, Integer id_client, Integer id_user, Integer order_flag, Date order_time, Date order_time_complit, Date order_time_change) {
-        this.id_goods = id_goods;
-        this.id_client = id_client;
-        this.id_user = id_user;
-        this.order_flag = order_flag;
+    public Orders(Goods good, Clients client, User user, Flags flag, Date order_time, Date order_time_complit, Date order_time_change) {
+        this.good = good;
+        this.client = client;
+        this.user = user;
+        this.flag = flag;
         this.order_time = order_time;
         this.order_time_complit = order_time_complit;
         this.order_time_change = order_time_change;
@@ -70,36 +77,36 @@ public class Orders implements Serializable{
         this.id_orders = id_orders;
     }
 
-    public Integer getId_goods() {
-        return id_goods;
+    public Goods getGood() {
+        return good;
     }
 
-    public void setId_goods(Integer id_goods) {
-        this.id_goods = id_goods;
+    public void setGood(Goods good) {
+        this.good = good;
     }
 
-    public Integer getId_client() {
-        return id_client;
+    public Clients getClient() {
+        return client;
     }
 
-    public void setId_client(Integer id_client) {
-        this.id_client = id_client;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getOrder_flag() {
-        return order_flag;
+    public Flags getFlag() {
+        return flag;
     }
 
-    public void setOrder_flag(Integer order_flag) {
-        this.order_flag = order_flag;
+    public void setFlag(Flags flag) {
+        this.flag = flag;
     }
 
     public Date getOrder_time() {
@@ -128,15 +135,15 @@ public class Orders implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id_orders);
-        hash = 59 * hash + Objects.hashCode(this.id_goods);
-        hash = 59 * hash + Objects.hashCode(this.id_client);
-        hash = 59 * hash + Objects.hashCode(this.id_user);
-        hash = 59 * hash + Objects.hashCode(this.order_flag);
-        hash = 59 * hash + Objects.hashCode(this.order_time);
-        hash = 59 * hash + Objects.hashCode(this.order_time_complit);
-        hash = 59 * hash + Objects.hashCode(this.order_time_change);
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.id_orders);
+        hash = 11 * hash + Objects.hashCode(this.good);
+        hash = 11 * hash + Objects.hashCode(this.client);
+        hash = 11 * hash + Objects.hashCode(this.user);
+        hash = 11 * hash + Objects.hashCode(this.flag);
+        hash = 11 * hash + Objects.hashCode(this.order_time);
+        hash = 11 * hash + Objects.hashCode(this.order_time_complit);
+        hash = 11 * hash + Objects.hashCode(this.order_time_change);
         return hash;
     }
 
@@ -155,16 +162,16 @@ public class Orders implements Serializable{
         if (!Objects.equals(this.id_orders, other.id_orders)) {
             return false;
         }
-        if (!Objects.equals(this.id_goods, other.id_goods)) {
+        if (!Objects.equals(this.good, other.good)) {
             return false;
         }
-        if (!Objects.equals(this.id_client, other.id_client)) {
+        if (!Objects.equals(this.client, other.client)) {
             return false;
         }
-        if (!Objects.equals(this.id_user, other.id_user)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if (!Objects.equals(this.order_flag, other.order_flag)) {
+        if (!Objects.equals(this.flag, other.flag)) {
             return false;
         }
         if (!Objects.equals(this.order_time, other.order_time)) {
@@ -178,8 +185,6 @@ public class Orders implements Serializable{
 
     @Override
     public String toString() {
-        return "Orders{" + "id_orders=" + id_orders + ", id_goods=" + id_goods + ", id_client=" + id_client + ", id_user=" + id_user + ", order_flag=" + order_flag + ", order_time=" + order_time + ", order_time_complit=" + order_time_complit + ", order_time_change=" + order_time_change + '}';
+        return "Orders{" + "id_orders=" + id_orders + ", good=" + good + ", client=" + client + ", user=" + user + ", flag=" + flag + ", order_time=" + order_time + ", order_time_complit=" + order_time_complit + ", order_time_change=" + order_time_change + '}';
     }
-     
-     
 }

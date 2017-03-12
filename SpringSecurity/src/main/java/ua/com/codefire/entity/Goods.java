@@ -6,9 +6,7 @@
 package ua.com.codefire.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,10 +24,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "goods", catalog = "food_service")
 public class Goods implements Serializable {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_goods", nullable = false)
     private Integer id_goods;
+
+    @Column(name = "good_name", nullable = false, length = 45)
     private String good_name;
+
+    @Column(name = "good_price", nullable = false)
     private Double good_price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private GoodCategory goodCategory;
 
     public Goods() {
@@ -42,9 +49,6 @@ public class Goods implements Serializable {
         this.goodCategory = goodCategory;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_goods", nullable = false)
     public Integer getId_goods() {
         return id_goods;
     }
@@ -53,7 +57,6 @@ public class Goods implements Serializable {
         this.id_goods = id_goods;
     }
 
-    @Column(name = "good_name", nullable = false, length = 45)
     public String getGood_name() {
         return good_name;
     }
@@ -62,7 +65,6 @@ public class Goods implements Serializable {
         this.good_name = good_name;
     }
 
-    @Column(name = "good_price", nullable = false)
     public Double getGood_price() {
         return good_price;
     }
@@ -71,8 +73,6 @@ public class Goods implements Serializable {
         this.good_price = good_price;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_good_category", nullable = false)
     public GoodCategory getGoodCategory() {
         return goodCategory;
     }

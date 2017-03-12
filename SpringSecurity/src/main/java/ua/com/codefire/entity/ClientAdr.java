@@ -24,37 +24,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientAdr")
 public class ClientAdr implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_adr", nullable = false, unique = true)
     private Integer id_adr;
-    
+
     @Column(name = "id_client", nullable = false)
     private Integer id_client;
-    
+
     @Column(name = "city", nullable = false, length = 45)
     private String city;
-    
+
     @Column(name = "street", nullable = false, length = 45)
     private String street;
-    
+
     @Column(name = "house", nullable = false, length = 45)
     private String house;
-    
+
     @Column(name = "apartment", nullable = true)
     private String apartment;
-    
+
     @Column(name = "floor", nullable = true)
     private Integer floor;
-    
+
     @Column(name = "porch", nullable = true)
     private Integer porch;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_clients", nullable = false)
     private Clients clients;
-
 
     public ClientAdr() {
     }
@@ -133,7 +132,7 @@ public class ClientAdr implements Serializable {
     public void setPorch(Integer porch) {
         this.porch = porch;
     }
-    
+
     public Clients getClients() {
         return clients;
     }
@@ -189,17 +188,11 @@ public class ClientAdr implements Serializable {
         if (!Objects.equals(this.floor, other.floor)) {
             return false;
         }
-        if (!Objects.equals(this.porch, other.porch)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.porch, other.porch);
     }
 
     @Override
     public String toString() {
         return "ClientAdr{" + "id_adr=" + id_adr + ", id_client=" + id_client + ", city=" + city + ", street=" + street + ", house=" + house + ", apartment=" + apartment + ", floor=" + floor + ", porch=" + porch + '}';
     }
-    
-    
-    
 }

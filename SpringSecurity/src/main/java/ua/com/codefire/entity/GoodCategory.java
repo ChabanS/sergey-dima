@@ -17,7 +17,12 @@ import javax.persistence.Table;
 @Table(name = "good_category", catalog = "food_service")
 public class GoodCategory implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_good_category", nullable = false)
     private Integer id_good_category;
+
+    @Column(name = "good_category_name", nullable = false, length = 45)
     private String good_category_name;
 
     public GoodCategory() {
@@ -27,9 +32,6 @@ public class GoodCategory implements Serializable {
         this.good_category_name = good_category_name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_good_category", nullable = false)
     public Integer getId_good_category() {
         return id_good_category;
     }
@@ -38,7 +40,6 @@ public class GoodCategory implements Serializable {
         this.id_good_category = id_good_category;
     }
 
-    @Column(name = "good_category_name", nullable = false, length = 45)
     public String getGood_category_name() {
         return good_category_name;
     }
@@ -77,6 +78,5 @@ public class GoodCategory implements Serializable {
     public String toString() {
         return "GoodCategory{" + "id_good_category=" + id_good_category + ", good_category_name=" + good_category_name + '}';
     }
-    
-    
+
 }

@@ -20,21 +20,26 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "user_roles", catalog = "food_service", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
 public class UserRoles implements java.io.Serializable {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "user_role_id", unique = true, nullable = false)
     private Integer userRoleId;
-    private User users;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username", nullable = false)
+    private User user;
+
+    @Column(name = "role", nullable = false, length = 45)
     private String role;
 
     public UserRoles() {
     }
 
     public UserRoles(User users, String role) {
-        this.users = users;
+        this.user = users;
         this.role = role;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "user_role_id", unique = true, nullable = false)
     public Integer getUserRoleId() {
         return this.userRoleId;
     }
@@ -43,17 +48,14 @@ public class UserRoles implements java.io.Serializable {
         this.userRoleId = userRoleId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", nullable = false)
-    public User getUsers() {
-        return this.users;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Column(name = "role", nullable = false, length = 45)
     public String getRole() {
         return this.role;
     }

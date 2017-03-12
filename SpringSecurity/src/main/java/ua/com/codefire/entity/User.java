@@ -14,10 +14,20 @@ import javax.persistence.Table;
 @Table(name = "users", catalog = "food_service")
 public class User implements java.io.Serializable {
 
+    @Id
+    @Column(name = "username", unique = true, nullable = false, length = 45)
     private String username;
+
+    @Column(name = "password", nullable = false, length = 127)
     private String password;
+
+    @Column(name = "enabled", nullable = false)
     private byte enabled;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "position")
     private String position;
 
     public User() {
@@ -29,8 +39,6 @@ public class User implements java.io.Serializable {
         this.enabled = enabled;
     }
 
-    @Id
-    @Column(name = "username", unique = true, nullable = false, length = 45)
     public String getUsername() {
         return this.username;
     }
@@ -39,7 +47,6 @@ public class User implements java.io.Serializable {
         this.username = username;
     }
 
-    @Column(name = "password", nullable = false, length = 127)
     public String getPassword() {
         return this.password;
     }
@@ -48,7 +55,6 @@ public class User implements java.io.Serializable {
         this.password = password;
     }
 
-    @Column(name = "enabled", nullable = false)
     public byte getEnabled() {
         return this.enabled;
     }
@@ -57,7 +63,6 @@ public class User implements java.io.Serializable {
         this.enabled = enabled;
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -66,7 +71,6 @@ public class User implements java.io.Serializable {
         this.name = name;
     }
 
-    @Column(name = "position")
     public String getPosition() {
         return position;
     }
@@ -117,5 +121,5 @@ public class User implements java.io.Serializable {
     public String toString() {
         return "User{" + "username=" + username + ", password=" + password + ", enabled=" + enabled + ", name=" + name + ", position=" + position + '}';
     }
-    
+
 }

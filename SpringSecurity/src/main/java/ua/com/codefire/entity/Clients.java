@@ -16,11 +16,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clients", catalog = "food_service")
 public class Clients implements java.io.Serializable {
-    
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id_clients", unique = true, nullable = false)
     private Integer id_clients;
+
+    @Column(name = "client_tel", nullable = false, length = 45)
     private String client_tel;
+
+    @Column(name = "client_name", nullable = false, length = 45)
     private String client_name;
+
+    @Column(name = "client_regdate", nullable = false)
     private Date client_regdate;
+
+    @Column(name = "client_info", nullable = true, length = 140)
     private String client_info;
 
     public Clients() {
@@ -33,9 +44,6 @@ public class Clients implements java.io.Serializable {
         this.client_info = client_info;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_clients", unique = true, nullable = false)
     public Integer getId_clients() {
         return id_clients;
     }
@@ -44,7 +52,6 @@ public class Clients implements java.io.Serializable {
         this.id_clients = id_clients;
     }
 
-    @Column(name = "client_tel", nullable = false, length = 45)
     public String getClient_tel() {
         return client_tel;
     }
@@ -53,7 +60,6 @@ public class Clients implements java.io.Serializable {
         this.client_tel = client_tel;
     }
 
-    @Column(name = "client_name", nullable = false, length = 45)
     public String getClient_name() {
         return client_name;
     }
@@ -62,7 +68,6 @@ public class Clients implements java.io.Serializable {
         this.client_name = client_name;
     }
 
-    @Column(name = "client_regdate", nullable = false)
     public Date getClient_regdate() {
         return client_regdate;
     }
@@ -71,7 +76,6 @@ public class Clients implements java.io.Serializable {
         this.client_regdate = client_regdate;
     }
 
-    @Column(name = "client_info", nullable = true, length = 140)
     public String getClient_info() {
         return client_info;
     }
@@ -115,17 +119,12 @@ public class Clients implements java.io.Serializable {
         if (!Objects.equals(this.id_clients, other.id_clients)) {
             return false;
         }
-        if (!Objects.equals(this.client_regdate, other.client_regdate)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.client_regdate, other.client_regdate);
     }
 
     @Override
     public String toString() {
         return "Clients{" + "id_clients=" + id_clients + ", client_tel=" + client_tel + ", client_name=" + client_name + ", client_regdate=" + client_regdate + ", client_info=" + client_info + '}';
     }
-    
-    
-    
+
 }
